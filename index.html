@@ -8,6 +8,14 @@
 <meta property="og:title" content="Lula - A virada histórica | Ebook por R$ 13">
 <meta property="og:description" content="Ebook independente, de R$ 24,90 por R$ 13. Juntos venceremos.">
 <meta name="theme-color" content="#a50d1a">
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MSSS3ZZ3"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-58F648ZYWC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-58F648ZYWC', { send_page_view: false });
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -222,7 +230,7 @@
           <p class="offer-price"><small>R$</small> 13</p>
           <p class="offer-save">Você economiza R$ 11,90</p>
         </div>
-        <a class="cta" data-comprar href="#">QUERO MEU EBOOK AGORA</a>
+        <a class="cta" data-comprar data-ga-id="G-58F648ZYWC" data-ga-event="clique_comprar_inicio" href="#">QUERO MEU EBOOK AGORA</a>
       </div>
       <p class="msg-link" data-msg role="status"></p>
     </div>
@@ -243,7 +251,7 @@
         <p class="offer-price"><small>R$</small> 13</p>
         <p class="offer-save">Você economiza R$ 11,90</p>
       </div>
-      <a class="cta" data-comprar href="#">COMPRAR POR R$ 13</a>
+      <a class="cta" data-comprar data-ga-id="G-58F648ZYWC" data-ga-event="clique_comprar_final" href="#">COMPRAR POR R$ 13</a>
     </div>
     <p class="msg-link" data-msg role="status"></p>
   </div>
@@ -251,7 +259,7 @@
 
 <div class="barra-fixa" id="barra-fixa">
   <p>De <s>R$ 24,90</s> por <strong>R$ 13</strong></p>
-  <a class="cta" data-comprar href="#">QUERO MEU EBOOK</a>
+  <a class="cta" data-comprar data-ga-id="G-58F648ZYWC" data-ga-event="clique_comprar_barra_fixa" href="#">QUERO MEU EBOOK</a>
 </div>
 
 <script>
@@ -269,6 +277,13 @@
       evento.preventDefault();
       const secao = botao.closest(".hero, .final") || document.querySelector(".final");
       secao.querySelector("[data-msg]").textContent = "As vendas abrem em breve. Volte logo!";
+    });
+  });
+
+  // Envia cada clique de compra para o Google Analytics.
+  document.querySelectorAll("[data-ga-id]").forEach((botao) => {
+    botao.addEventListener("click", () => {
+      gtag("event", botao.dataset.gaEvent, { send_to: botao.dataset.gaId, transport_type: "beacon" });
     });
   });
 
