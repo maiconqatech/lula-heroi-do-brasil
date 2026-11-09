@@ -40,7 +40,11 @@
   }
   .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
   .hero {
-    background: radial-gradient(120% 90% at 80% 0%, #df1f2e 0%, var(--vermelho) 48%, var(--vermelho-escuro) 100%);
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 86% 16%, rgba(255, 210, 63, .15), transparent 30%),
+      radial-gradient(120% 90% at 80% 0%, #df1f2e 0%, var(--vermelho) 48%, var(--vermelho-escuro) 100%);
     padding: 48px 0 64px;
   }
   .hero .container {
@@ -49,21 +53,18 @@
     gap: 48px;
     align-items: center;
   }
-  .autor-tag {
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--amarelo);
-    margin: 0 0 12px;
-  }
   h1, h2, .grito { font-family: Anton, Impact, sans-serif; font-weight: 400; text-transform: uppercase; }
   h1 { font-size: clamp(52px, 7.2vw, 92px); line-height: 1.14; margin: 0; }
   .grito { color: var(--amarelo); font-size: clamp(32px, 5vw, 54px); line-height: 1.1; margin: 12px 0 18px; }
   .sub { font-size: clamp(18px, 2.2vw, 22px); margin: 0 0 26px; max-width: 34em; }
   .promo-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 14px;
     margin: 0;
-    padding: 10px 16px;
+    padding: 12px 16px;
     background: var(--vermelho-noite);
     color: var(--creme);
     font-size: 15px;
@@ -74,6 +75,43 @@
   }
   .promo-bar strong { color: var(--amarelo); font-size: 1.125em; font-weight: 800; }
   .promo-bar s, .promo-bar strong { white-space: nowrap; }
+  .timer {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 10px;
+    border: 1px solid rgba(255, 210, 63, .55);
+    border-radius: 999px;
+    color: var(--amarelo);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .timer time { font-weight: 800; }
+  .brand-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    padding: 7px 12px 7px 8px;
+    border: 1px solid rgba(255, 255, 255, .32);
+    border-radius: 999px;
+    background: rgba(79, 4, 11, .26);
+    color: var(--branco);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .pt-mark {
+    display: grid;
+    width: 31px;
+    height: 31px;
+    place-items: center;
+    border-radius: 50%;
+    background: #e31b34;
+    box-shadow: inset 0 0 0 2px var(--branco);
+  }
+  .pt-mark svg { width: 19px; height: 19px; fill: var(--branco); }
   .compra { display: flex; flex-direction: column; align-items: stretch; gap: 20px; width: 100%; max-width: 400px; }
   .final .compra { margin: 0 auto; }
   .cta {
@@ -116,6 +154,16 @@
     justify-content: flex-end;
     transform: rotate(3deg);
   }
+  .capa::before {
+    content: "";
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
+    background: var(--vermelho);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 94%, 50% 71%, 21% 94%, 32% 57%, 2% 35%, 39% 35%);
+  }
   .capa b { font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: 58px; line-height: 1.04; text-transform: uppercase; }
   .capa b span { color: var(--amarelo); display: block; }
   .capa i { font-style: normal; font-weight: 600; margin-top: 14px; font-size: 16px; }
@@ -123,6 +171,19 @@
   .final { background: var(--vermelho-escuro); padding: 64px 0; text-align: center; }
   .final h2 { font-size: clamp(44px, 8vw, 88px); line-height: 1.05; margin: 0 0 12px; }
   .final p { margin: 0 auto 26px; max-width: 32em; }
+  .apoio-pt {
+    margin: 0 auto 30px;
+    padding: 20px;
+    max-width: 680px;
+    border: 1px solid rgba(255, 210, 63, .42);
+    border-radius: 16px;
+    background: rgba(79, 4, 11, .42);
+    color: var(--creme);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, .14);
+  }
+  .apoio-pt p { margin: 0 auto 8px; }
+  .apoio-pt strong { color: var(--amarelo); }
+  .apoio-pt small { display: block; color: rgba(255, 233, 228, .8); font-size: 13px; }
 
   .offer {
     position: relative;
@@ -179,16 +240,24 @@
 
   @media (max-width: 760px) {
     body { font-size: 17px; }
+    .promo-bar { gap: 7px 10px; padding: 12px 14px; font-size: 13px; }
+    .timer { gap: 5px; padding: 5px 9px; font-size: 12px; }
     .hero { padding: 28px 0 44px; }
-    .hero .container { grid-template-columns: minmax(0, 1fr); gap: 36px; }
-    h1 { font-size: clamp(46px, 13.5vw, 84px); line-height: 1.1; }
+    .hero .container { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+    .brand-tag { margin-bottom: 16px; }
+    h1 { font-size: clamp(43px, 12.5vw, 76px); line-height: 1.06; letter-spacing: -.025em; }
     .grito { font-size: clamp(30px, 8.6vw, 44px); margin: 10px 0 12px; }
-    .sub { font-size: 17px; margin-bottom: 30px; }
+    .sub { font-size: 16px; line-height: 1.65; margin-bottom: 24px; }
     .compra { max-width: 420px; margin: 0 auto; }
     .cta { display: block; width: 100%; padding: 16px 12px; font-size: clamp(16px, 5vw, 20px); line-height: 1.3; }
-    .capa { width: 190px; padding: 18px 16px; box-shadow: -8px 0 0 var(--tinta), 0 18px 34px rgba(0,0,0,.4); }
+    .offer { padding: 28px 14px 18px; border-width: 2px; border-radius: 14px; }
+    .offer .offer-price { font-size: 72px; }
+    .capa { width: min(230px, 66vw); padding: 20px 18px; border-radius: 8px 16px 16px 8px; box-shadow: -8px 0 0 var(--tinta), 0 18px 34px rgba(0,0,0,.4); }
     .capa b { font-size: 34px; }
+    .capa::before { top: 14px; right: 14px; }
     .final { padding: 52px 0 calc(116px + env(safe-area-inset-bottom)); }
+    .final h2 { font-size: clamp(42px, 12vw, 68px); }
+    .apoio-pt { padding: 18px 16px; border-radius: 14px; }
 
     .barra-fixa {
       display: block;
@@ -215,11 +284,24 @@
 </head>
 <body>
 
-<p class="promo-bar">Promoção: de <s>R$ 24,90</s> por <strong>R$ 13</strong> · 48% OFF</p>
+<p class="promo-bar">
+  <span>Oferta em destaque: de <s>R$ 24,90</s> por <strong>R$ 13</strong> · 48% OFF</span>
+  <span class="timer" aria-label="Contador demonstrativo; a oferta não expira quando o tempo terminar">
+    <span aria-hidden="true">⏱</span>
+    <span>Contador ilustrativo</span>
+    <time data-countdown aria-live="off">05:00</time>
+  </span>
+</p>
 
 <header class="hero">
   <div class="container">
     <div>
+      <p class="brand-tag">
+        <span class="pt-mark" aria-hidden="true">
+          <svg viewBox="0 0 100 100" focusable="false"><path d="m50 6 10.3 28.1 30-1.1-23.7 18.5 8.2 28.9L50 63.1 25.2 80.4l8.2-28.9L9.7 33l30 1.1z"/></svg>
+        </span>
+        História e compromisso com o Brasil
+      </p>
       <h1>Lula - <span style="white-space:nowrap">A virada</span> histórica</h1>
       <p class="grito">Juntos venceremos!</p>
       <p class="sub">A história de Lula, do menino retirante de Caetés à Presidência da República. Conheça a trajetória de quem nunca desistiu do Brasil, por apenas R$ 13.</p>
@@ -244,6 +326,10 @@
   <div class="container">
     <h2>Juntos venceremos</h2>
     <p>São só R$ 13. Compre hoje, compartilhe com quem acredita no Brasil.</p>
+    <div class="apoio-pt">
+      <p><strong>Apoie o PT na construção de soluções para as dívidas do Brasil e de um futuro com mais oportunidades para o povo.</strong></p>
+      <small>Este ebook é independente; a compra não é uma doação ao PT.</small>
+    </div>
     <div class="compra">
       <div class="offer">
         <p class="offer-tag">Promoção · 48% OFF</p>
@@ -265,6 +351,18 @@
 <script>
   // Cole aqui o link do produto, entre as aspas.
   const LINK_PRODUTO = "https://pay.kiwify.com.br/OvYGYBH";
+
+  const contador = document.querySelector("[data-countdown]");
+  let segundosRestantes = 5 * 60;
+  const atualizarContador = () => {
+    const minutos = Math.floor(segundosRestantes / 60);
+    const segundos = segundosRestantes % 60;
+    contador.textContent = `${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
+    if (segundosRestantes > 0) segundosRestantes -= 1;
+    else window.clearInterval(intervaloContador);
+  };
+  atualizarContador();
+  const intervaloContador = window.setInterval(atualizarContador, 1000);
 
   const botoes = document.querySelectorAll("[data-comprar]");
   botoes.forEach((botao) => {
