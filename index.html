@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lula - A virada histórica | Ebook por R$ 13</title>
-<meta name="description" content="A história de Lula em um ebook independente, de R$ 24,90 por R$ 13. Campanha até 11 de novembro. Juntos venceremos.">
+<meta name="description" content="A história de Lula em um ebook independente, de R$ 24,90 por R$ 13. Juntos venceremos.">
 <meta property="og:title" content="Lula - A virada histórica | Ebook por R$ 13">
-<meta property="og:description" content="Ebook independente, de R$ 24,90 por R$ 13. Campanha até 11 de novembro. Juntos venceremos.">
+<meta property="og:description" content="Ebook independente, de R$ 24,90 por R$ 13. Juntos venceremos.">
 <meta name="theme-color" content="#a50d1a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,18 +112,6 @@
   .capa b span { color: var(--amarelo); display: block; }
   .capa i { font-style: normal; font-weight: 600; margin-top: 14px; font-size: 16px; }
 
-  .prazo { background: var(--vermelho-noite); padding: 40px 0; text-align: center; }
-  .prazo h2 { font-size: clamp(26px, 4vw, 40px); margin: 0 0 20px; line-height: 1.15; }
-  .contador {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 130px));
-    justify-content: center;
-    gap: 10px;
-  }
-  .contador div { background: var(--vermelho); border-radius: 8px; padding: 14px 4px; }
-  .contador b { display: block; font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: clamp(36px, 8vw, 58px); line-height: 1.1; font-variant-numeric: tabular-nums; }
-  .contador span { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
-
   .final { background: var(--vermelho-escuro); padding: 64px 0; text-align: center; }
   .final h2 { font-size: clamp(44px, 8vw, 88px); line-height: 1.05; margin: 0 0 12px; }
   .final p { margin: 0 auto 26px; max-width: 32em; }
@@ -192,9 +180,6 @@
     .cta { display: block; width: 100%; padding: 16px 12px; font-size: clamp(16px, 5vw, 20px); line-height: 1.3; }
     .capa { width: 190px; padding: 18px 16px; box-shadow: -8px 0 0 var(--tinta), 0 18px 34px rgba(0,0,0,.4); }
     .capa b { font-size: 34px; }
-    .prazo { padding: 32px 0; }
-    .contador { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-    .contador span { font-size: 12px; letter-spacing: 0; }
     .final { padding: 52px 0 calc(116px + env(safe-area-inset-bottom)); }
 
     .barra-fixa {
@@ -222,7 +207,7 @@
 </head>
 <body>
 
-<p class="promo-bar">Promoção até 11/11: de <s>R$ 24,90</s> por <strong>R$ 13</strong> · 48% OFF</p>
+<p class="promo-bar">Promoção: de <s>R$ 24,90</s> por <strong>R$ 13</strong> · 48% OFF</p>
 
 <header class="hero">
   <div class="container">
@@ -246,18 +231,6 @@
     </div>
   </div>
 </header>
-
-<section class="prazo" aria-labelledby="titulo-prazo">
-  <div class="container">
-    <h2 id="titulo-prazo">A campanha termina em 11 de novembro</h2>
-    <div class="contador" id="contador">
-      <div><b data-d>00</b><span>dias</span></div>
-      <div><b data-h>00</b><span>horas</span></div>
-      <div><b data-m>00</b><span>min</span></div>
-      <div><b data-s>00</b><span>seg</span></div>
-    </div>
-  </div>
-</section>
 
 <section class="final">
   <div class="container">
@@ -313,28 +286,6 @@
     }, { rootMargin: "0px 0px -80px 0px" });
     document.querySelectorAll(".hero .cta, .final .cta").forEach((botao) => observador.observe(botao));
   }
-
-  const FIM = new Date("2026-11-11T23:59:59-03:00").getTime();
-  const contador = document.getElementById("contador");
-  const dois = (n) => String(n).padStart(2, "0");
-
-  function atualizar() {
-    const resta = FIM - Date.now();
-    if (resta <= 0) {
-      document.getElementById("titulo-prazo").textContent = "A campanha foi encerrada";
-      contador.hidden = true;
-      contador.style.display = "none";
-      clearInterval(timer);
-      return;
-    }
-    const s = Math.floor(resta / 1000);
-    contador.querySelector("[data-d]").textContent = dois(Math.floor(s / 86400));
-    contador.querySelector("[data-h]").textContent = dois(Math.floor(s / 3600) % 24);
-    contador.querySelector("[data-m]").textContent = dois(Math.floor(s / 60) % 60);
-    contador.querySelector("[data-s]").textContent = dois(s % 60);
-  }
-  const timer = setInterval(atualizar, 1000);
-  atualizar();
 </script>
 </body>
 </html>
