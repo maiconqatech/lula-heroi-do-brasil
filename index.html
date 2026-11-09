@@ -2,11 +2,11 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lula - A virada histórica | Ebook por R$ 13</title>
-<meta name="description" content="A história de Lula em um ebook independente, por R$ 13. Campanha até 11 de novembro. Juntos venceremos.">
+<meta name="description" content="A história de Lula em um ebook independente, de R$ 24,90 por R$ 13. Campanha até 11 de novembro. Juntos venceremos.">
 <meta property="og:title" content="Lula - A virada histórica | Ebook por R$ 13">
-<meta property="og:description" content="Ebook independente. Campanha até 11 de novembro. Juntos venceremos.">
+<meta property="og:description" content="Ebook independente, de R$ 24,90 por R$ 13. Campanha até 11 de novembro. Juntos venceremos.">
 <meta name="theme-color" content="#a50d1a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
     --tinta: #2a0307;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   body {
     margin: 0;
     background: var(--vermelho);
@@ -50,13 +50,27 @@
     margin: 0 0 12px;
   }
   h1, h2, .grito { font-family: Anton, Impact, sans-serif; font-weight: 400; text-transform: uppercase; }
-  h1 { font-size: clamp(52px, 9vw, 104px); line-height: 1.14; margin: 0; }
+  h1 { font-size: clamp(52px, 7.2vw, 92px); line-height: 1.14; margin: 0; }
   .grito { color: var(--amarelo); font-size: clamp(32px, 5vw, 54px); line-height: 1.1; margin: 12px 0 18px; }
   .sub { font-size: clamp(18px, 2.2vw, 22px); margin: 0 0 26px; max-width: 34em; }
-  .compra { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
-  .preco { font-family: Anton, Impact, sans-serif; font-size: 60px; line-height: 1; white-space: nowrap; }
-  .preco small { font-size: 28px; }
+  .promo-bar {
+    margin: 0;
+    padding: 10px 16px;
+    background: var(--vermelho-noite);
+    color: var(--creme);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .promo-bar strong { color: var(--amarelo); font-size: 1.125em; font-weight: 800; }
+  .promo-bar s, .promo-bar strong { white-space: nowrap; }
+  .compra { display: flex; flex-direction: column; align-items: stretch; gap: 20px; width: 100%; max-width: 400px; }
+  .final .compra { margin: 0 auto; }
   .cta {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
     display: inline-block;
     background: var(--amarelo);
     color: var(--tinta);
@@ -72,10 +86,14 @@
     box-shadow: 0 6px 0 #c79a06;
     transition: transform .12s ease, box-shadow .12s ease;
   }
-  .cta:hover { transform: translateY(2px); box-shadow: 0 4px 0 #c79a06; }
+  @media (hover: hover) {
+    .cta:hover { transform: translateY(2px); box-shadow: 0 4px 0 #c79a06; }
+  }
+  .cta:active { transform: translateY(4px); box-shadow: 0 2px 0 #c79a06; }
   .cta:focus-visible { outline: 3px solid var(--branco); outline-offset: 3px; }
   .aviso-compra { font-size: 15px; margin: 18px 0 0; color: var(--creme); }
   .msg-link { font-weight: 600; color: var(--amarelo); margin: 12px 0 0; min-height: 1.5em; }
+  .msg-link:empty { display: none; }
 
   .capa {
     justify-self: center;
@@ -110,26 +128,101 @@
   .final h2 { font-size: clamp(44px, 8vw, 88px); line-height: 1.05; margin: 0 0 12px; }
   .final p { margin: 0 auto 26px; max-width: 32em; }
 
+  .offer {
+    position: relative;
+    margin-top: 14px;
+    padding: 30px 18px 20px;
+    border: 3px solid var(--amarelo);
+    border-radius: 16px;
+    background: var(--branco);
+    color: var(--tinta);
+    text-align: center;
+    box-shadow: 0 18px 36px rgba(0,0,0,.28);
+  }
+  .offer p { margin: 0; }
+  .offer .offer-tag {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: var(--vermelho-noite);
+    color: var(--amarelo);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .offer-from { font-size: 18px; font-weight: 600; }
+  .offer-from s { font-size: 1.2em; font-weight: 800; text-decoration-color: var(--vermelho); text-decoration-thickness: 3px; }
+  .offer .offer-price { color: var(--vermelho); font-family: Anton, Impact, sans-serif; font-size: 84px; line-height: 1.1; }
+  .offer-price small { font-size: .45em; }
+  .offer .offer-save {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: var(--vermelho-noite);
+    color: var(--amarelo);
+    font-size: 16px;
+    font-weight: 800;
+  }
+
   footer { background: var(--vermelho-noite); color: var(--creme); font-size: 14px; padding: 28px 0; }
   footer p { margin: 0 0 8px; }
 
+  .barra-fixa { display: none; }
+
+  @media (min-width: 1000px) {
+    .hero .compra { flex-direction: row; align-items: center; max-width: none; }
+    .hero .offer { flex: 0 0 290px; margin-top: 0; }
+    .hero .cta { flex: 1; }
+  }
+
   @media (max-width: 760px) {
-    .hero { padding: 32px 0 48px; }
+    body { font-size: 17px; }
+    .hero { padding: 28px 0 44px; }
     .hero .container { grid-template-columns: minmax(0, 1fr); gap: 36px; }
-    .compra { flex-direction: column; align-items: stretch; text-align: center; }
-    .cta { width: 100%; }
-    .capa { width: 230px; padding: 20px 18px; }
-    .capa b { font-size: 42px; }
+    h1 { font-size: clamp(46px, 13.5vw, 84px); line-height: 1.1; }
+    .grito { font-size: clamp(30px, 8.6vw, 44px); margin: 10px 0 12px; }
+    .sub { font-size: 17px; margin-bottom: 30px; }
+    .compra { max-width: 420px; margin: 0 auto; }
+    .cta { display: block; width: 100%; padding: 16px 12px; font-size: clamp(16px, 5vw, 20px); line-height: 1.3; }
+    .capa { width: 190px; padding: 18px 16px; box-shadow: -8px 0 0 var(--tinta), 0 18px 34px rgba(0,0,0,.4); }
+    .capa b { font-size: 34px; }
+    .prazo { padding: 32px 0; }
     .contador { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-    .contador span { font-size: 11px; letter-spacing: 0; }
+    .contador span { font-size: 12px; letter-spacing: 0; }
+    .final { padding: 52px 0 calc(116px + env(safe-area-inset-bottom)); }
+
+    .barra-fixa {
+      display: block;
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 10;
+      padding: 8px 12px max(12px, env(safe-area-inset-bottom));
+      background: rgba(79, 4, 11, .96);
+      box-shadow: 0 -6px 18px rgba(0,0,0,.3);
+      transition: transform .2s ease, visibility .2s ease;
+    }
+    .barra-fixa.oculta { visibility: hidden; transform: translateY(110%); }
+    .barra-fixa p { margin: 0 0 6px; font-size: 15px; font-weight: 600; text-align: center; color: var(--creme); }
+    .barra-fixa p strong { color: var(--amarelo); font-size: 1.25em; font-weight: 800; }
+    .barra-fixa .cta { padding: 12px 20px; font-size: 18px; box-shadow: 0 4px 0 #c79a06; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .cta { transition: none; }
+    .cta, .barra-fixa { transition: none; }
   }
 </style>
 </head>
 <body>
+
+<p class="promo-bar">Promoção até 11/11: de <s>R$ 24,90</s> por <strong>R$ 13</strong> · 48% OFF</p>
 
 <header class="hero">
   <div class="container">
@@ -138,7 +231,12 @@
       <p class="grito">Juntos venceremos!</p>
       <p class="sub">A história de Lula, do menino retirante de Caetés à Presidência da República. Conheça a trajetória de quem nunca desistiu do Brasil, por apenas R$ 13.</p>
       <div class="compra">
-        <div class="preco"><small>R$</small> 13</div>
+        <div class="offer">
+          <p class="offer-tag">Promoção · 48% OFF</p>
+          <p class="offer-from">De <s>R$ 24,90</s> por apenas</p>
+          <p class="offer-price"><small>R$</small> 13</p>
+          <p class="offer-save">Você economiza R$ 11,90</p>
+        </div>
         <a class="cta" data-comprar href="#">QUERO MEU EBOOK AGORA</a>
       </div>
       <p class="msg-link" data-msg role="status"></p>
@@ -165,10 +263,23 @@
   <div class="container">
     <h2>Juntos venceremos</h2>
     <p>São só R$ 13. Compre hoje, compartilhe com quem acredita no Brasil.</p>
-    <a class="cta" data-comprar href="#">COMPRAR POR R$ 13</a>
+    <div class="compra">
+      <div class="offer">
+        <p class="offer-tag">Promoção · 48% OFF</p>
+        <p class="offer-from">De <s>R$ 24,90</s> por apenas</p>
+        <p class="offer-price"><small>R$</small> 13</p>
+        <p class="offer-save">Você economiza R$ 11,90</p>
+      </div>
+      <a class="cta" data-comprar href="#">COMPRAR POR R$ 13</a>
+    </div>
     <p class="msg-link" data-msg role="status"></p>
   </div>
 </section>
+
+<div class="barra-fixa" id="barra-fixa">
+  <p>De <s>R$ 24,90</s> por <strong>R$ 13</strong></p>
+  <a class="cta" data-comprar href="#">QUERO MEU EBOOK</a>
+</div>
 
 <script>
   // Cole aqui o link do produto, entre as aspas.
@@ -183,10 +294,25 @@
     }
     botao.addEventListener("click", (evento) => {
       evento.preventDefault();
-      const aviso = botao.closest(".hero, .final").querySelector("[data-msg]");
-      aviso.textContent = "As vendas abrem em breve. Volte logo!";
+      const secao = botao.closest(".hero, .final") || document.querySelector(".final");
+      secao.querySelector("[data-msg]").textContent = "As vendas abrem em breve. Volte logo!";
     });
   });
+
+  // No celular, a barra fixa some enquanto um botão de compra da página está na tela.
+  const barraFixa = document.getElementById("barra-fixa");
+  if ("IntersectionObserver" in window) {
+    const visiveis = new Set();
+    barraFixa.classList.add("oculta");
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) visiveis.add(entrada.target);
+        else visiveis.delete(entrada.target);
+      });
+      barraFixa.classList.toggle("oculta", visiveis.size > 0);
+    }, { rootMargin: "0px 0px -80px 0px" });
+    document.querySelectorAll(".hero .cta, .final .cta").forEach((botao) => observador.observe(botao));
+  }
 
   const FIM = new Date("2026-11-11T23:59:59-03:00").getTime();
   const contador = document.getElementById("contador");
